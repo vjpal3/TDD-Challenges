@@ -19,7 +19,7 @@ namespace TDDDueDate
         }
         public DateTime CheckDate(DateTime dueDate)
         {
-            throw new NotImplementedException();
+            return dueDate;
         }
     }
 }
