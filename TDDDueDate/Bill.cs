@@ -19,7 +19,10 @@ namespace TDDDueDate
         }
         public DateTime CheckDate(DateTime dueDate)
         {
-            return dueDate;
+            if(!service.isHoliday(dueDate))
+                return dueDate;
+
+            return new DateTime();
         }
     }
 }
