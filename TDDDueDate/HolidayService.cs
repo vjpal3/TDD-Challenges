@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TDDDueDate
 {
-    public class HolidayService : IHolidayService
+    public class HolidayService<T> : IHolidayService
     {
         public bool isHoliday(DateTime dueDate)
         {
