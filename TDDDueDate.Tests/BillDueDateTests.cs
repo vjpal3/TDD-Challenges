@@ -51,5 +51,20 @@ namespace TDDDueDate.Tests
 
             Assert.That(output, Is.EqualTo(expected));
         }
+
+        [Test]
+        public void ifHoliday_ReturnNonHoliday()
+        {
+            var input = new DateTime(2020, 5, 25);
+
+            var mockHolidayService = new HolidayService<IHolidayService>();
+            var _bill = new Bill(mockHolidayService);
+
+            var output = _bill.CheckDate(input);
+            var expected = input.AddDays(1);
+
+            Assert.That(output, Is.EqualTo(expected));
+        }
+
     }
 }
