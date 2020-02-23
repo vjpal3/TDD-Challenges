@@ -9,5 +9,6 @@ namespace TDDDueDate
     public interface IHolidayService
     {
         bool isHoliday(DateTime duedate);
+        bool IsWeekEnd(DateTime dueDate);
     }
 }

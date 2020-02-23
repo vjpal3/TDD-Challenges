@@ -19,10 +19,13 @@ namespace TDDDueDate
         }
         public DateTime CheckDate(DateTime dueDate)
         {
+            if (service.IsWeekEnd(dueDate))
+                dueDate = dueDate.AddDays(2);
+
             if(!service.isHoliday(dueDate))
                 return dueDate;
 
-            return new DateTime();
+            return dueDate;
         }
     }
 }

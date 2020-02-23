@@ -23,5 +23,19 @@ namespace TDDDueDate.Tests
 
             Assert.That(expected, Is.EqualTo(output));
         }
+
+        [Test]
+        public void ifSaturday_ReturnMonday()
+        {
+            var input = new DateTime(2020, 2, 22);
+
+            var mockHolidayService = new HolidayService<IHolidayService>();
+            var _bill = new Bill(mockHolidayService);
+            var expected = new DateTime(2020, 2, 24);
+
+            var output = _bill.CheckDate(input);
+
+            Assert.That(output, Is.EqualTo(expected));
+        }
     }
 }
