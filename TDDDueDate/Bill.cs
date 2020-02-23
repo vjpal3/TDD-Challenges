@@ -19,7 +19,6 @@ namespace TDDDueDate
         }
         public DateTime CheckDate(DateTime dueDate)
         {
-
             dueDate = CheckWeekEnd(dueDate);
 
             if(service.isHoliday(dueDate))
@@ -27,7 +26,6 @@ namespace TDDDueDate
                 dueDate = CheckWeekEnd(dueDate.AddDays(1));
             }
                 
-
             return dueDate;
         }
 
