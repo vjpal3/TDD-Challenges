@@ -27,7 +27,7 @@ namespace TDDDueDate
 
         public bool IsWeekEnd(DateTime dueDate)
         {
-            if (dueDate.DayOfWeek == DayOfWeek.Saturday)
+            if (dueDate.DayOfWeek == DayOfWeek.Saturday || dueDate.DayOfWeek == DayOfWeek.Sunday)
                 return true;
 
             return false;

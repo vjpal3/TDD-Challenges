@@ -20,7 +20,19 @@ namespace TDDDueDate
         public DateTime CheckDate(DateTime dueDate)
         {
             if (service.IsWeekEnd(dueDate))
-                dueDate = dueDate.AddDays(2);
+            {
+                switch (dueDate.DayOfWeek)
+                {
+                    case DayOfWeek.Saturday:
+                        dueDate = dueDate.AddDays(2);
+                        break;
+                    case DayOfWeek.Sunday:
+                        dueDate = dueDate.AddDays(1);
+                        break;
+                }
+                return dueDate;
+            }
+
 
             if(!service.isHoliday(dueDate))
                 return dueDate;
