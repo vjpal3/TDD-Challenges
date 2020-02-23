@@ -10,30 +10,41 @@ namespace TDDDueDate.Tests
     [TestFixture]
     public class BillDueDateTests
     {
+        private Bill bill;
+        private HolidayService<IHolidayService> mockHolidayService;
+
+        [OneTimeSetUp]      
+        public void Init()
+        {
+            mockHolidayService = new HolidayService<IHolidayService>();
+            bill = new Bill(mockHolidayService);
+        }
+
+        [OneTimeTearDown]
+        public void Cleanup()
+        {
+            mockHolidayService = null;
+            bill = null;
+        }
+
         [Test]
         public void ifBussinessDay_ReturnDueDate()
         {
             var input = new DateTime(2020, 8, 6);
-
-            var mockHolidayService = new HolidayService<IHolidayService>();
-            var _bill = new Bill(mockHolidayService);
-
-            var output = _bill.CheckDate(input);
             var expected = input;
 
-            Assert.That(expected, Is.EqualTo(output));
+            var output = bill.CheckDate(input);
+
+            Assert.That(output, Is.EqualTo(expected));
         }
 
         [Test]
         public void ifSaturday_ReturnMonday()
         {
             var input = new DateTime(2020, 2, 22);
-
-            var mockHolidayService = new HolidayService<IHolidayService>();
-            var _bill = new Bill(mockHolidayService);
             var expected = new DateTime(2020, 2, 24);
 
-            var output = _bill.CheckDate(input);
+            var output = bill.CheckDate(input);
 
             Assert.That(output, Is.EqualTo(expected));
         }
@@ -42,12 +53,9 @@ namespace TDDDueDate.Tests
         public void ifSunday_ReturnMonday()
         {
             var input = new DateTime(2020, 2, 23);
-
-            var mockHolidayService = new HolidayService<IHolidayService>();
-            var _bill = new Bill(mockHolidayService);
             var expected = new DateTime(2020, 2, 24);
 
-            var output = _bill.CheckDate(input);
+            var output = bill.CheckDate(input);
 
             Assert.That(output, Is.EqualTo(expected));
         }
@@ -56,12 +64,9 @@ namespace TDDDueDate.Tests
         public void ifHoliday_ReturnNonHoliday()
         {
             var input = new DateTime(2020, 5, 25);
+            var expected = input.AddDays(1); 
 
-            var mockHolidayService = new HolidayService<IHolidayService>();
-            var _bill = new Bill(mockHolidayService);
-
-            var output = _bill.CheckDate(input);
-            var expected = input.AddDays(1);
+            var output = bill.CheckDate(input);
 
             Assert.That(output, Is.EqualTo(expected));
         }
@@ -70,11 +75,8 @@ namespace TDDDueDate.Tests
         public void ifHoliday_ReturnWeekday()
         {
             var input = new DateTime(2020, 12, 25);
+            var output = bill.CheckDate(input);
 
-            var mockHolidayService = new HolidayService<IHolidayService>();
-            var _bill = new Bill(mockHolidayService);
-
-            var output = _bill.CheckDate(input);
             var expected = input.AddDays(3);
 
             Assert.That(output, Is.EqualTo(expected));
