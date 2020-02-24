@@ -10,7 +10,7 @@ namespace TDDRetirementCalcService
     {
         public int RetirementYears(Client client)
         {
-            throw new NotImplementedException();
+            return 0;
         }
     }
 }
