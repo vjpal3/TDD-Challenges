@@ -10,7 +10,8 @@ namespace TDDRetirementCalcService
     {
         public int RetirementYears(Client client)
         {
-            return 0;
+            int years = (int)Math.Floor(client.netWorth / (client.desiredMonthlySpending * 12));
+            return years;
         }
     }
 }

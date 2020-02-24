@@ -27,5 +27,25 @@ namespace TDDRetirementCalService.Tests
             var output = calculator.RetirementYears(client);
             Assert.That(output, Is.TypeOf<int>());
         }
+
+        [Test]
+        public void SimpleClientReturns_CorrectYears()
+        {
+            var client = new Client
+            {
+                currentAge = 70,
+                targetRetirementAge = 65,
+                netWorth = 500000,
+                desiredMonthlySpending = 2500
+            };
+            double expected = 16;
+
+            var calculator = new Calculator();
+
+            var output = calculator.RetirementYears(client);
+            Assert.That(output, Is.EqualTo(expected));
+
+        }
+
     }
 }
