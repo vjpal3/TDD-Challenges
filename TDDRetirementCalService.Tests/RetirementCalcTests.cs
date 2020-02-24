@@ -47,5 +47,30 @@ namespace TDDRetirementCalService.Tests
 
         }
 
+        [Test]
+        public void ComplicatedClientReturns_CorrectYears()
+        {
+            var client = new Client
+            {
+                currentAge = 47,
+                targetRetirementAge = 65,
+                netWorth = 500000,
+                desiredMonthlySpending = 2500,
+                yearlySavingContribution = 22000,
+                yearlyExpenses = 55000
+            };
+
+            int yearsToRetirement = client.targetRetirementAge - client.currentAge; //18
+            
+            double netWorthAtRetirement = client.netWorth + (client.yearlySavingContribution * yearsToRetirement); // 896,000
+
+            int expected = (int)(netWorthAtRetirement / (client.desiredMonthlySpending * 12)); //29
+
+            var calculator = new Calculator();
+            var output = calculator.RetirementYears(client);
+
+            Assert.That(output, Is.EqualTo(expected));
+        }
+
     }
 }

@@ -10,7 +10,20 @@ namespace TDDRetirementCalcService
     {
         public int RetirementYears(Client client)
         {
-            int years = (int)Math.Floor(client.netWorth / (client.desiredMonthlySpending * 12));
+            int years;
+            double netWorthAtRetirement;
+            if (client.currentAge >= client.targetRetirementAge)
+            {
+                netWorthAtRetirement = client.netWorth;
+            }
+            else
+            {
+                int yearsToRetirement = client.targetRetirementAge - client.currentAge; 
+                netWorthAtRetirement = client.netWorth + (client.yearlySavingContribution * yearsToRetirement); 
+            }
+
+            years = (int)(netWorthAtRetirement / (client.desiredMonthlySpending * 12)); 
+
             return years;
         }
     }
