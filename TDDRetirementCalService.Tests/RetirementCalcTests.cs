@@ -72,5 +72,30 @@ namespace TDDRetirementCalService.Tests
             Assert.That(output, Is.EqualTo(expected));
         }
 
+        [Test]
+        public void NotEnoughForRetirementReturns_Zero()
+        {
+            var client = new Client
+            {
+                currentAge = 47,
+                targetRetirementAge = 65,
+                netWorth = 10000,
+                desiredMonthlySpending = 2500,
+                yearlySavingContribution = 1000,
+                yearlyExpenses = 55000
+            };
+
+            int yearsToRetirement = client.targetRetirementAge - client.currentAge; 
+
+            double netWorthAtRetirement = client.netWorth + (client.yearlySavingContribution * yearsToRetirement); 
+
+            int expected = (int)(netWorthAtRetirement / (client.desiredMonthlySpending * 12)); 
+
+            var calculator = new Calculator();
+            var output = calculator.RetirementYears(client);
+
+            Assert.That(output, Is.EqualTo(expected));
+        }
+
     }
 }
