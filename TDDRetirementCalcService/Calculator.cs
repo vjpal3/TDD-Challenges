@@ -8,7 +8,7 @@ namespace TDDRetirementCalcService
 {
     public class Calculator
     {
-        public int RetirementYears(Client client)
+        public int RetirementYears(Client client, IExpense expense = null)
         {
             int years;
             double netWorthAtRetirement;
@@ -20,6 +20,11 @@ namespace TDDRetirementCalcService
             {
                 int yearsToRetirement = client.targetRetirementAge - client.currentAge; 
                 netWorthAtRetirement = client.netWorth + (client.yearlySavingContribution * yearsToRetirement); 
+            }
+
+            if(expense != null)
+            {
+                netWorthAtRetirement -= expense.totalExpense();
             }
 
             years = (int)(netWorthAtRetirement / (client.desiredMonthlySpending * 12)); 
